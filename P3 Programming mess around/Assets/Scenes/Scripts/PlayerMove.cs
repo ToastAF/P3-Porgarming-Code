@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerMove : MonoBehaviour
 {
     Rigidbody rb;
     public float moveSpeed;
 
+    public LayerMask clickableThings;
+    private NavMeshAgent agent;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
@@ -29,6 +34,17 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(0, 0, moveSpeed * Time.deltaTime);
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray pointRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hitInfo;
+
+            if(Physics.Raycast(pointRay, out hitInfo, 100, clickableThings))
+            {
+                agent.SetDestination(hitInfo.point);
+            }
         }
     }
 }
