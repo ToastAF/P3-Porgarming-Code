@@ -720,7 +720,7 @@ GameObject:
   - component: {fileID: 1490152478}
   - component: {fileID: 1490152477}
   m_Layer: 7
-  m_Name: Plane
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1042,6 +1042,7 @@ GameObject:
   - component: {fileID: 2123650047}
   - component: {fileID: 2123650046}
   - component: {fileID: 2123650045}
+  - component: {fileID: 2123650052}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1059,13 +1060,13 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 3
+  m_Acceleration: 50
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 180
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 1
@@ -1202,6 +1203,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2123650052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123650044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f37ede22d089545b80ecd02204d016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  qProjectile: {fileID: 8947668820757692471, guid: 2a4ef5b573ffc8342a4016c74bc9b874, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

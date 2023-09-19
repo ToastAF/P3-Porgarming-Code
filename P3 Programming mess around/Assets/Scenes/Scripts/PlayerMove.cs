@@ -36,13 +36,15 @@ public class PlayerMove : MonoBehaviour
             transform.position += new Vector3(0, 0, moveSpeed * Time.deltaTime);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             Ray pointRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
 
             if(Physics.Raycast(pointRay, out hitInfo, 100, clickableThings))
             {
+                //print("hitInfo: " + hitInfo);
+                //print("point: " + hitInfo.point);
                 agent.SetDestination(hitInfo.point);
             }
         }
