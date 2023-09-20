@@ -11,6 +11,8 @@ public class PlayerMove : MonoBehaviour
     public LayerMask clickableThings;
     private NavMeshAgent agent;
 
+    public GameObject moveMarker;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -46,6 +48,7 @@ public class PlayerMove : MonoBehaviour
                 //print("hitInfo: " + hitInfo);
                 //print("point: " + hitInfo.point);
                 agent.SetDestination(hitInfo.point);
+                Instantiate(moveMarker, hitInfo.point, Quaternion.identity);
             }
         }
     }
