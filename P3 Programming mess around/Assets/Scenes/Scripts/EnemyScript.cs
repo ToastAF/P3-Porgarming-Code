@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    float health, armor, magicResist;
+    double health, armor, magicResist;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,13 +28,19 @@ public class EnemyScript : MonoBehaviour
         {
             QProperties newScript = other.gameObject.GetComponent<QProperties>();
             Destroy(other.gameObject);
-            health -= newScript.physDmg + newScript.magDmg;
+            health -= calculateDamage(newScript.physDmg, newScript.magDmg);
+            //print(calculateDamage(newScript.physDmg, newScript.magDmg));
             print("DAMAGE! Current health: " + health);
         }
     }
 
-    void calculateDamage()
+    double calculateDamage(float rawPhysDmg, float rawMagDmg)
     {
+        double mitDmg;
 
+        //Calculate armor and magic resist
+        mitDmg = System.Math.Round(rawPhysDmg * (100 / (100 + armor)) + rawMagDmg * (100 / (100 + magicResist)), 2) ;
+
+        return mitDmg;
     }
 }
