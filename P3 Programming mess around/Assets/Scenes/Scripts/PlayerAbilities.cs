@@ -6,7 +6,10 @@ using UnityEngine.AI;
 public class PlayerAbilities : MonoBehaviour
 {
     public GameObject qProjectile;
-    private bool QReady = true;
+    PlayerMove playerScript;
+
+    bool qReady = true;
+    public float qManaCost;
 
     NavMeshAgent playerNav;
     public float abilityInterruptTime;
@@ -14,14 +17,19 @@ public class PlayerAbilities : MonoBehaviour
     void Start()
     {
         playerNav = GetComponent<NavMeshAgent>();
+        playerScript = GetComponent<PlayerMove>();
     }
 
     void Update()
     {
+        
+
+        //Cast Q ability
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if(QReady == true)
+            if(qReady == true && (playerScript.currentMana >= qManaCost))
             {
+                playerScript.currentMana -= qManaCost;
                 StartCoroutine(PutOnCooldown(3));
                 StartCoroutine(InterruptMovement());
                 Instantiate(qProjectile, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
@@ -31,9 +39,9 @@ public class PlayerAbilities : MonoBehaviour
 
     IEnumerator PutOnCooldown(int CD)
     {
-        QReady = false;
+        qReady = false;
         yield return new WaitForSeconds(CD);
-        QReady = true;
+        qReady = true;
     }
 
     IEnumerator InterruptMovement()

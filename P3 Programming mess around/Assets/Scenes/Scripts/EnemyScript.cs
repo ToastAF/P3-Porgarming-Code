@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    double health, armor, magicResist;
+    public double maxHealth;
+    double currentHealth, armor, magicResist;
     // Start is called before the first frame update
     void Start()
     {
-        health = 20;
+        maxHealth = 20;
+        currentHealth = maxHealth;
         armor = 5;
         magicResist = 5;
     }
@@ -16,7 +18,7 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(health <= 0)
+        if(currentHealth <= 0)
         {
             Destroy(gameObject);
         }
@@ -28,9 +30,9 @@ public class EnemyScript : MonoBehaviour
         {
             QProperties newScript = other.gameObject.GetComponent<QProperties>();
             Destroy(other.gameObject);
-            health -= calculateDamage(newScript.physDmg, newScript.magDmg);
+            currentHealth -= calculateDamage(newScript.physDmg, newScript.magDmg);
             //print(calculateDamage(newScript.physDmg, newScript.magDmg));
-            print("DAMAGE! Current health: " + health);
+            print("DAMAGE! Current health: " + currentHealth);
         }
     }
 

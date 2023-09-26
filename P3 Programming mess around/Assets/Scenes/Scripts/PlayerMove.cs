@@ -7,6 +7,9 @@ public class PlayerMove : MonoBehaviour
 {
     Rigidbody rb;
     public float moveSpeed;
+    public float maxHealth, maxMana, manaRegen;
+    public float currentHealth, currentMana;
+    bool manaRegenReady = true;
 
     public LayerMask clickableThings;
     private NavMeshAgent agent;
@@ -17,11 +20,14 @@ public class PlayerMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+
+        currentHealth = maxHealth;
+        currentMana = maxMana;
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
+        /*if (Input.GetKey(KeyCode.W))
         {
             transform.position += new Vector3(-moveSpeed * Time.deltaTime, 0, 0);
         }
@@ -36,7 +42,18 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(0, 0, moveSpeed * Time.deltaTime);
+        }*/
+
+        //Regen mana
+        if (manaRegenReady == true)
+        {
+            if(currentMana < (maxMana - manaRegen))
+            {
+                currentMana += manaRegen;
+            }
+            StartCoroutine(ManaRegenCoolDown(1));
         }
+        print(currentMana + " / " + maxMana);
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -51,5 +68,12 @@ public class PlayerMove : MonoBehaviour
                 Instantiate(moveMarker, hitInfo.point, Quaternion.identity);
             }
         }
+    }
+
+    IEnumerator ManaRegenCoolDown(int CD)
+    {
+        manaRegenReady = false;
+        yield return new WaitForSeconds(CD);
+        manaRegenReady = true;
     }
 }
