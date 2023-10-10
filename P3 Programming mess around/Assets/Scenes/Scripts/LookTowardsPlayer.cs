@@ -5,11 +5,12 @@ using UnityEngine;
 public class LookTowardsPlayer : MonoBehaviour
 {
     GameObject player;
+    public float rotateExtraAmountX, rotateExtraAmountY, rotateExtraAmountZ;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         transform.LookAt(player.transform.position);
-        transform.Rotate(0, -45, 0);
+        transform.Rotate(rotateExtraAmountX, rotateExtraAmountY, rotateExtraAmountZ);
     }
 
     // Update is called once per frame

@@ -11,6 +11,7 @@ public class PlayerAbilities : MonoBehaviour
     bool qReady = true;
     public float qManaCost;
 
+    public LayerMask clickableThings;
     NavMeshAgent playerNav;
     public float abilityInterruptTime;
 
@@ -32,8 +33,20 @@ public class PlayerAbilities : MonoBehaviour
                 playerScript.currentMana -= qManaCost;
                 StartCoroutine(PutOnCooldown(3));
                 StartCoroutine(InterruptMovement());
+                LookAtLocation();
                 Instantiate(qProjectile, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
             }
+        }
+    }
+
+    void LookAtLocation()
+    {
+        Ray pointRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(pointRay, out hitInfo, 100, clickableThings))
+        {
+            transform.LookAt(hitInfo.point);
         }
     }
 

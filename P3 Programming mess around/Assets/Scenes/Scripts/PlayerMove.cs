@@ -58,6 +58,7 @@ public class PlayerMove : MonoBehaviour
                 //print("hitInfo: " + hitInfo);
                 //print("point: " + hitInfo.point);
                 agent.SetDestination(hitInfo.point);
+                transform.LookAt(hitInfo.point);
                 Instantiate(moveMarker, hitInfo.point, Quaternion.identity);
             }
         }
