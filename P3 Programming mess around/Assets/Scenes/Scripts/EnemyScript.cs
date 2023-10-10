@@ -6,6 +6,8 @@ public class EnemyScript : MonoBehaviour
 {
     public double maxHealth;
     double currentHealth, armor, magicResist;
+
+    public GameObject hitParticles;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,7 @@ public class EnemyScript : MonoBehaviour
         {
             QProperties newScript = other.gameObject.GetComponent<QProperties>();
             Destroy(other.gameObject);
+            Instantiate(hitParticles, transform.position, Quaternion.identity);
             currentHealth -= calculateDamage(newScript.physDmg, newScript.magDmg);
             //print(calculateDamage(newScript.physDmg, newScript.magDmg));
             print("DAMAGE! Current health: " + currentHealth);

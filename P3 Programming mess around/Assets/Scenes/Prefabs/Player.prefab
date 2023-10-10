@@ -151,10 +151,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  maxHealth: 100
+  maxMana: 100
+  healthRegen: 0.5
+  manaRegen: 1
+  currentHealth: 0
+  currentMana: 0
   clickableThings:
     serializedVersion: 2
     m_Bits: 128
   moveMarker: {fileID: 3273472982059236293, guid: 770dc49cf6b6e0b419141eb3cae5ab20, type: 3}
+  healthText: {fileID: 0}
+  manaText: {fileID: 0}
 --- !u!114 &4441868405089245178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   qProjectile: {fileID: 8947668820757692471, guid: 2a4ef5b573ffc8342a4016c74bc9b874, type: 3}
+  qManaCost: 0
   abilityInterruptTime: 0.3
 --- !u!195 &8900849998690693811
 NavMeshAgent:
