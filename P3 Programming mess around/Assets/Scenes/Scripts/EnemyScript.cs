@@ -7,8 +7,8 @@ public class EnemyScript : MonoBehaviour
     public double maxHealth;
     double currentHealth, armor, magicResist;
 
-    public GameObject hitParticles;
-    // Start is called before the first frame update
+    public GameObject hitParticles, deathParticles;
+
     void Start()
     {
         maxHealth = 20;
@@ -17,12 +17,12 @@ public class EnemyScript : MonoBehaviour
         magicResist = 5;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(currentHealth <= 0)
         {
             Destroy(gameObject);
+            Instantiate(deathParticles, transform.position, Quaternion.identity);
         }
     }
 
@@ -31,11 +31,15 @@ public class EnemyScript : MonoBehaviour
         if (other.gameObject.CompareTag("Projectile"))
         {
             QProperties newScript = other.gameObject.GetComponent<QProperties>();
-            Destroy(other.gameObject);
-            Instantiate(hitParticles, transform.position, Quaternion.identity);
             currentHealth -= calculateDamage(newScript.physDmg, newScript.magDmg);
+
             //print(calculateDamage(newScript.physDmg, newScript.magDmg));
             print("DAMAGE! Current health: " + currentHealth);
+
+            if(currentHealth > 0)
+            {
+            Instantiate(hitParticles, transform.position, Quaternion.identity);
+            }
         }
     }
 

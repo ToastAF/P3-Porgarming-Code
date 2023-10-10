@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class QProperties : MonoBehaviour
@@ -17,6 +18,7 @@ public class QProperties : MonoBehaviour
     public float physDmg;
     public float magDmg;
 
+    public GameObject hitParticles;
 
     void Start()
     {
@@ -42,6 +44,15 @@ public class QProperties : MonoBehaviour
         tempRange = (transform.position - playerStartPos).magnitude;
         if(tempRange > mousePlayerVec.normalized.magnitude*setRange)
         {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Instantiate(hitParticles, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

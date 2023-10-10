@@ -2,23 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using TMPro;
 
 public class PlayerMove : MonoBehaviour
 {
     Rigidbody rb;
-    public float moveSpeed;
+    public float attackDamage, abilityPower, moveSpeed;
     public float maxHealth, maxMana, healthRegen, manaRegen;
     public float currentHealth, currentMana;
     bool regenReady = true;
 
+    //NavMesh Stuff
     public LayerMask clickableThings;
     private NavMeshAgent agent;
 
     public GameObject moveMarker;
 
+    //UI Stuff
     public GameObject healthText;
     public GameObject manaText;
+    public Image healthBar, ManaBar;
 
     void Start()
     {
@@ -31,31 +35,16 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        //UI Stuff
         healthText.GetComponent<TextMeshProUGUI>().text = "Health: " + currentHealth + " / " + maxHealth;
+        healthBar.fillAmount = currentHealth / maxHealth;
         manaText.GetComponent<TextMeshProUGUI>().text = "Mana: " + currentMana + " / " + maxMana;
+        ManaBar.fillAmount = currentMana / maxMana;
 
         //Health and mana regen
         if (regenReady == true)
         {
-            if(currentHealth < maxHealth)
-            {
-                currentHealth += healthRegen;
-                //Health can't regen to over max amount of health
-                if(currentHealth > maxHealth)
-                {
-                    currentHealth = maxHealth;
-                }
-            }
-            if (currentMana < maxMana)
-            {
-                currentMana += manaRegen;
-                //Mana can't regen to over max amount of mana
-                if (currentMana > maxMana)
-                {
-                    currentMana = maxMana;
-                }
-            }
-            StartCoroutine(ManaRegenCoolDown(1));
+            StartCoroutine(RegenPerSecond(1));
         }
         //print(currentMana + " / " + maxMana);
 
@@ -74,9 +63,27 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    IEnumerator ManaRegenCoolDown(int CD)
+    IEnumerator RegenPerSecond(int CD)
     {
         regenReady = false;
+            if(currentHealth < maxHealth)
+            {
+                currentHealth += healthRegen;
+                //Health can't regen to over max amount of health
+                if(currentHealth > maxHealth)
+                {
+                    currentHealth = maxHealth;
+                }
+            }
+            if (currentMana < maxMana)
+            {
+                currentMana += manaRegen;
+                //Mana can't regen to over max amount of mana
+                if (currentMana > maxMana)
+                {
+                    currentMana = maxMana;
+                }
+            }
         yield return new WaitForSeconds(CD);
         regenReady = true;
     }
