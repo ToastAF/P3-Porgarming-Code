@@ -8,7 +8,7 @@ using TMPro;
 public class PlayerMove : MonoBehaviour
 {
     Rigidbody rb;
-    public float attackDamage, abilityPower, moveSpeed;
+    public float attackDamage, abilityPower, moveSpeed, attackRange;
     public float maxHealth, maxMana, healthRegen, manaRegen;
     public float currentHealth, currentMana;
     bool regenReady = true;
@@ -20,8 +20,7 @@ public class PlayerMove : MonoBehaviour
     public GameObject moveMarker;
 
     //UI Stuff
-    public GameObject healthText;
-    public GameObject manaText;
+    public GameObject healthText, manaText, adText, apText, msText; 
     public Image healthBar, ManaBar;
 
     void Start()
@@ -40,6 +39,9 @@ public class PlayerMove : MonoBehaviour
         healthBar.fillAmount = currentHealth / maxHealth;
         manaText.GetComponent<TextMeshProUGUI>().text = "Mana: " + currentMana + " / " + maxMana;
         ManaBar.fillAmount = currentMana / maxMana;
+        adText.GetComponent<TextMeshProUGUI>().text = $"{attackDamage}";
+        apText.GetComponent<TextMeshProUGUI>().text = $"{abilityPower}";
+
 
         //Health and mana regen
         if (regenReady == true)
@@ -59,6 +61,7 @@ public class PlayerMove : MonoBehaviour
                 //print("point: " + hitInfo.point);
                 agent.SetDestination(hitInfo.point);
                 transform.LookAt(hitInfo.point);
+                //Spawn move indicator (Little green cirle)
                 Instantiate(moveMarker, hitInfo.point, Quaternion.identity);
             }
         }
