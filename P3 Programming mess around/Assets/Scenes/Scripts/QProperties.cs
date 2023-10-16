@@ -7,6 +7,7 @@ public class QProperties : MonoBehaviour
 {
     Rigidbody rb;
     GameObject player;
+    PlayerMove playerScript;
     public LayerMask clickableThings;
     public int projectileSpeed;
 
@@ -24,8 +25,12 @@ public class QProperties : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player");
+        playerScript = player.GetComponent<PlayerMove>();
         playerStartPos = player.transform.position;
         //StartCoroutine(DestroySelf());
+
+        physDmg = playerScript.attackDamage * 0.5f;
+        magDmg = playerScript.abilityPower * 1.5f;
         
         Ray pointRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;

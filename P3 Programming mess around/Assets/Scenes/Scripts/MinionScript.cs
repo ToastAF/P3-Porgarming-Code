@@ -9,6 +9,7 @@ public class MinionScript : EnemyScript
     GameObject player;
     public GameObject projectile;
     bool attackCD = false;
+    public float attackSpeedDelay;
 
     void Start()
     {
@@ -30,7 +31,7 @@ public class MinionScript : EnemyScript
         {
             if (attackCD == false)
             {
-                StartCoroutine(AttackCD(1));
+                StartCoroutine(AttackCD(attackSpeedDelay));
             }
         }
 
@@ -41,11 +42,18 @@ public class MinionScript : EnemyScript
         }
     }
 
-    IEnumerator AttackCD(int number)
+    IEnumerator AttackCD(float number)
     {
         attackCD = true;
         Instantiate(projectile, transform.position, Quaternion.identity);
+        LookAtPlayer();
         yield return new WaitForSeconds(number);
         attackCD = false;
+    }
+
+    void LookAtPlayer()
+    {
+        Vector3 temp = player.transform.position;
+        transform.LookAt(new Vector3(temp.x, transform.position.y, temp.z));
     }
 }

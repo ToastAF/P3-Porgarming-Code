@@ -28,7 +28,7 @@ public class PlayerMove : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
 
-        currentHealth = maxHealth/2;
+        currentHealth = maxHealth;
         currentMana = maxMana;
     }
 
