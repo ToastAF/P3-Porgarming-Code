@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 
 public class PlayerMove : MonoBehaviour
 {
-    Rigidbody rb;
-    public float attackDamage, abilityPower, moveSpeed, attackRange;
+    public float attackDamage, abilityPower, moveSpeed, attackRange, armor, magicResist;
     public float maxHealth, maxMana, healthRegen, manaRegen;
     public float currentHealth, currentMana;
     bool regenReady = true;
@@ -25,7 +26,6 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
 
         currentHealth = maxHealth/2;
@@ -35,7 +35,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         //UI Stuff
-        healthText.GetComponent<TextMeshProUGUI>().text = "Health: " + currentHealth + " / " + maxHealth;
+        healthText.GetComponent<TextMeshProUGUI>().text = "Health: " + (int)currentHealth + " / " + maxHealth;
         healthBar.fillAmount = currentHealth / maxHealth;
         manaText.GetComponent<TextMeshProUGUI>().text = "Mana: " + currentMana + " / " + maxMana;
         ManaBar.fillAmount = currentMana / maxMana;
@@ -60,11 +60,22 @@ public class PlayerMove : MonoBehaviour
                 //print("hitInfo: " + hitInfo);
                 //print("point: " + hitInfo.point);
                 agent.SetDestination(hitInfo.point);
-                transform.LookAt(hitInfo.point);
+                transform.LookAt(new Vector3(hitInfo.point.x, hitInfo.point.y + transform.position.y, hitInfo.point.z));
                 //Spawn move indicator (Little green cirle)
                 Instantiate(moveMarker, hitInfo.point, Quaternion.identity);
             }
         }
+    }
+
+    public void TakeDamage(float physDmg, float magDmg)
+    {
+            currentHealth -= calculateDamage(physDmg, magDmg);
+            print("Player damage!");
+
+            if (currentHealth <= 0)
+            {
+                print("Dead!");
+            }
     }
 
     IEnumerator RegenPerSecond(int CD)
@@ -90,5 +101,15 @@ public class PlayerMove : MonoBehaviour
             }
         yield return new WaitForSeconds(CD);
         regenReady = true;
+    }
+
+    public float calculateDamage(float rawPhysDmg, float rawMagDmg)
+    {
+        float mitDmg;
+
+        //Calculate armor and magic resist
+        mitDmg = (float)(System.Math.Round(rawPhysDmg * (100 / (100 + armor)) + rawMagDmg * (100 / (100 + magicResist)), 2));
+
+        return mitDmg;
     }
 }

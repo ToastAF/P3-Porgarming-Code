@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
     public double maxHealth;
-    double currentHealth, armor, magicResist;
+    public double currentHealth, armor, magicResist;
+    public float range;
 
     public GameObject hitParticles, deathParticles;
+
+    //Health bar
+    public Image hBar;
 
     void Start()
     {
@@ -19,6 +24,9 @@ public class EnemyScript : MonoBehaviour
 
     void Update()
     {
+        //Health bar
+        hBar.fillAmount = (float)(currentHealth / maxHealth);
+
         if(currentHealth <= 0)
         {
             Destroy(gameObject);
@@ -26,7 +34,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Projectile"))
         {
@@ -43,12 +51,12 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    double calculateDamage(float rawPhysDmg, float rawMagDmg)
+    public float calculateDamage(float rawPhysDmg, float rawMagDmg)
     {
-        double mitDmg;
+        float mitDmg;
 
         //Calculate armor and magic resist
-        mitDmg = System.Math.Round(rawPhysDmg * (100 / (100 + armor)) + rawMagDmg * (100 / (100 + magicResist)), 2) ;
+        mitDmg = (float)(System.Math.Round(rawPhysDmg * (100 / (100 + armor)) + rawMagDmg * (100 / (100 + magicResist)), 2));
 
         return mitDmg;
     }
