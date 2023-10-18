@@ -6,6 +6,11 @@ public class MinionScript : EnemyScript
 {
     //MinionScript enherits from EnemyScript, so it has all the public variables from there.
 
+    //Object to show attack range
+    public GameObject rangeCircle;
+    Color normal = new(0, 0, 0, 0.15f);
+    Color inRange = new(0, 0, 0, 0.55f);
+
     GameObject player;
     public GameObject projectile;
     bool attackCD = false;
@@ -23,16 +28,24 @@ public class MinionScript : EnemyScript
 
     void Update()
     {
+        //Show range
+        rangeCircle.transform.localScale = new Vector3(2*range, 2*range, 2*range);
+
         //Health bar
         hBar.fillAmount = (float)(currentHealth / maxHealth);
 
         //Attacks player if close enough
         if(Vector3.Distance(transform.position, player.transform.position) < range)
         {
+            rangeCircle.GetComponent<SpriteRenderer>().color = inRange;
             if (attackCD == false)
             {
                 StartCoroutine(AttackCD(attackSpeedDelay));
             }
+        }
+        else
+        {
+            rangeCircle.GetComponent<SpriteRenderer>().color = normal;
         }
 
         if (currentHealth <= 0)

@@ -142,6 +142,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   physDmg: 5
-  magDmg: 5
+  magDmg: 0
   projectileSpeed: 5
   hitRadius: 0.5

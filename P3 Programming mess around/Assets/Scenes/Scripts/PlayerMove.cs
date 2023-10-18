@@ -42,7 +42,6 @@ public class PlayerMove : MonoBehaviour
         adText.GetComponent<TextMeshProUGUI>().text = $"{attackDamage}";
         apText.GetComponent<TextMeshProUGUI>().text = $"{abilityPower}";
 
-
         //Health and mana regen
         if (regenReady == true)
         {
