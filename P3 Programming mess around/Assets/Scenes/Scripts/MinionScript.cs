@@ -11,10 +11,12 @@ public class MinionScript : EnemyScript
     Color normal = new(0, 0, 0, 0.15f);
     Color inRange = new(0, 0, 0, 0.55f);
 
-    GameObject player;
     public GameObject projectile;
     bool attackCD = false;
     public float attackSpeedDelay;
+
+    Animator anim;
+    //GameObject player;
 
     void Start()
     {
@@ -24,6 +26,7 @@ public class MinionScript : EnemyScript
         magicResist = 0;
 
         player = GameObject.FindGameObjectWithTag("Player");
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -40,7 +43,7 @@ public class MinionScript : EnemyScript
             rangeCircle.GetComponent<SpriteRenderer>().color = inRange;
             if (attackCD == false)
             {
-                StartCoroutine(AttackCD(attackSpeedDelay));
+                StartCoroutine(AttackCD(attackSpeedDelay)); 
             }
         }
         else
@@ -50,8 +53,9 @@ public class MinionScript : EnemyScript
 
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            player.GetComponent<PlayerMove>().gold += 50;
             Instantiate(deathParticles, transform.position, Quaternion.identity);
+            Destroy(gameObject);
         }
     }
 
@@ -60,6 +64,9 @@ public class MinionScript : EnemyScript
         attackCD = true;
         Instantiate(projectile, transform.position, Quaternion.identity);
         LookAtPlayer();
+        anim.SetBool("isShoot", true);
+        yield return new WaitForSeconds(0.2f);
+        anim.SetBool("isShoot", false);
         yield return new WaitForSeconds(number);
         attackCD = false;
     }

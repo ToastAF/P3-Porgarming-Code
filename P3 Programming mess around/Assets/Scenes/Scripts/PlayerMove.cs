@@ -10,7 +10,7 @@ using UnityEditor.PackageManager;
 public class PlayerMove : MonoBehaviour
 {
     public float attackDamage, abilityPower, moveSpeed, attackRange, armor, magicResist;
-    public float maxHealth, maxMana, healthRegen, manaRegen;
+    public float maxHealth, maxMana, healthRegen, manaRegen, gold;
     public float currentHealth, currentMana;
     bool regenReady = true;
 
@@ -21,7 +21,7 @@ public class PlayerMove : MonoBehaviour
     public GameObject moveMarker;
 
     //UI Stuff
-    public GameObject healthText, manaText, adText, apText, msText; 
+    public GameObject healthText, manaText, adText, apText, msText, goldText; 
     public Image healthBar, ManaBar;
 
     void Start()
@@ -41,6 +41,7 @@ public class PlayerMove : MonoBehaviour
         ManaBar.fillAmount = currentMana / maxMana;
         adText.GetComponent<TextMeshProUGUI>().text = $"{attackDamage}";
         apText.GetComponent<TextMeshProUGUI>().text = $"{abilityPower}";
+        goldText.GetComponent<TextMeshProUGUI>().text = $"Gold: {gold}";
 
         //Health and mana regen
         if (regenReady == true)
@@ -98,6 +99,8 @@ public class PlayerMove : MonoBehaviour
                     currentMana = maxMana;
                 }
             }
+        //Gain gold per second
+        gold += 1;
         yield return new WaitForSeconds(CD);
         regenReady = true;
     }

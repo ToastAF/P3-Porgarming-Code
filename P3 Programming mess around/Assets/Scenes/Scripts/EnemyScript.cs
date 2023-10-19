@@ -10,6 +10,7 @@ public class EnemyScript : MonoBehaviour
     public float range;
 
     public GameObject hitParticles, deathParticles;
+    public GameObject player;
 
     //Health bar
     public Image hBar;
@@ -20,6 +21,8 @@ public class EnemyScript : MonoBehaviour
         currentHealth = maxHealth;
         armor = 5;
         magicResist = 5;
+
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
@@ -29,8 +32,9 @@ public class EnemyScript : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            Destroy(gameObject);
+            player.GetComponent<PlayerMove>().gold += 150;
             Instantiate(deathParticles, transform.position, Quaternion.identity);
+            Destroy(gameObject);
         }
     }
 

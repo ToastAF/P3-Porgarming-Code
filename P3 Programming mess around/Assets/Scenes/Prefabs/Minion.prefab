@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: 7774423243408578181}
   - component: {fileID: 7685989315444182243}
   - component: {fileID: 4472092566140312868}
+  - component: {fileID: 7157877745463395376}
   m_Layer: 0
   m_Name: Minion
   m_TagString: Enemy
@@ -461,6 +462,27 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &7157877745463395376
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4495431614460873031}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fd0f8bdbc90846e42abd9ea64e647df0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6385968442553146613
 GameObject:
   m_ObjectHideFlags: 0
