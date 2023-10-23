@@ -31,7 +31,7 @@ public class PlayerAbilities : MonoBehaviour
             if(qReady == true && (playerScript.currentMana >= qManaCost))
             {
                 playerScript.currentMana -= qManaCost;
-                StartCoroutine(PutOnCooldown(3));
+                StartCoroutine(PutOnCooldown(2));
                 StartCoroutine(InterruptMovement());
                 LookAtLocation();
                 Instantiate(qProjectile, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
