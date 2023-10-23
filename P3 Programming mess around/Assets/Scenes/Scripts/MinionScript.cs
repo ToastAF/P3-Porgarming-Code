@@ -65,7 +65,7 @@ public class MinionScript : EnemyScript
         Instantiate(projectile, transform.position, Quaternion.identity);
         LookAtPlayer();
         anim.SetBool("isShoot", true);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.6f);
         anim.SetBool("isShoot", false);
         yield return new WaitForSeconds(number);
         attackCD = false;
