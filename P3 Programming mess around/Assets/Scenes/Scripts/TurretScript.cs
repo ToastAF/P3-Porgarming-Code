@@ -47,8 +47,25 @@ public class TurretScript : EnemyScript
         if (currentHealth <= 0)
         {
             player.GetComponent<PlayerMove>().gold += 50;
-            Instantiate(deathParticles, transform.position, Quaternion.identity);
+            Instantiate(deathParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
             Destroy(gameObject);
+        }
+    }
+
+    new private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Projectile"))
+        {
+            QProperties newScript = other.gameObject.GetComponent<QProperties>();
+            currentHealth -= calculateDamage(newScript.physDmg, newScript.magDmg);
+
+            //print(calculateDamage(newScript.physDmg, newScript.magDmg));
+            print("DAMAGE! Current health: " + currentHealth);
+
+            if (currentHealth > 0)
+            {
+                Instantiate(hitParticles, new Vector3(transform.position.x, transform.position.y+2, transform.position.z), Quaternion.identity);
+            }
         }
     }
 

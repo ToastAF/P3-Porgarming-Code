@@ -57,6 +57,7 @@ public class QProperties : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            //Spawns small sparkles when hitting an enemy
             Instantiate(hitParticles, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }

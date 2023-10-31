@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7920552309088327123}
   - component: {fileID: 7534872186955314812}
   m_Layer: 0
-  m_Name: Turret Death Particles
+  m_Name: Turret Hit Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 6
+      scalar: 5.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -871,7 +871,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 40
+      scalar: 22
       minScalar: 10
       maxCurve:
         serializedVersion: 2

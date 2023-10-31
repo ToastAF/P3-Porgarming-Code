@@ -50,7 +50,7 @@ public class EnemyScript : MonoBehaviour
 
             if(currentHealth > 0)
             {
-            Instantiate(hitParticles, transform.position, Quaternion.identity);
+                Instantiate(hitParticles, transform.position, Quaternion.identity);
             }
         }
     }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7181129816300819579}
   - component: {fileID: 7987244576708382404}
   m_Layer: 0
-  m_Name: MinionProjectile
+  m_Name: TurretProjectile
   m_TagString: Minion Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.02, z: 5.21}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e01e5e819d54c3d4791f56cf2efc5015, type: 2}
+  - {fileID: 2100000, guid: f3a91db3e47c82b46934de1681820af9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPlayerParticle: {fileID: 6784171575501145830, guid: eb8a086679f2a8448bbea6e848c1c3f2, type: 3}
-  physDmg: 5
+  physDmg: 20
   magDmg: 0
   projectileSpeed: 5
   hitRadius: 0.5

@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class MinionProjectileScript : MonoBehaviour
 {
     GameObject player;
+    public GameObject hitPlayerParticle;
     NavMeshAgent agent;
     public float physDmg, magDmg, projectileSpeed, hitRadius;
 
@@ -26,6 +27,7 @@ public class MinionProjectileScript : MonoBehaviour
         if(Vector3.Distance(transform.position, player.transform.position) < hitRadius)
         {
             player.GetComponent<PlayerMove>().TakeDamage(physDmg, magDmg);
+            Instantiate(hitPlayerParticle, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
