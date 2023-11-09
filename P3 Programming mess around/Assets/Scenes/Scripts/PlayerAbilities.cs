@@ -19,6 +19,9 @@ public class PlayerAbilities : MonoBehaviour
     {
         playerNav = GetComponent<NavMeshAgent>();
         playerScript = GetComponent<PlayerMove>();
+        castReady = true;
+        qReady = true;
+        wReady = true;
     }
 
     void Update()
