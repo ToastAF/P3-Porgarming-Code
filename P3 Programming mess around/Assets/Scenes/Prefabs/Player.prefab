@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 8422127794573911703}
   - component: {fileID: 4441868405089245178}
   - component: {fileID: 8900849998690693811}
+  - component: {fileID: 8304618760111346907}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -238,6 +239,7 @@ MonoBehaviour:
   maxMana: 100
   healthRegen: 0.5
   manaRegen: 1
+  gold: 0
   currentHealth: 0
   currentMana: 0
   clickableThings:
@@ -249,6 +251,7 @@ MonoBehaviour:
   adText: {fileID: 0}
   apText: {fileID: 0}
   msText: {fileID: 0}
+  goldText: {fileID: 0}
   healthBar: {fileID: 0}
   ManaBar: {fileID: 0}
 --- !u!114 &4441868405089245178
@@ -291,3 +294,15 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8304618760111346907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5345727105219145895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb78b7aa7da2a140abaecc3c4303eeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

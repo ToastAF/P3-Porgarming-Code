@@ -37,9 +37,9 @@ public class QProperties : MonoBehaviour
         
         if (Physics.Raycast(pointRay, out hitInfo, 100, clickableThings))
         {
-            //print("I'm doing something!");
-            mousePlayerVec = new Vector3(hitInfo.point.x, hitInfo.point.y + player.transform.position.y, hitInfo.point.z) - player.transform.position;
-            transform.LookAt(hitInfo.point);
+            Vector3 v = new Vector3(hitInfo.point.x, hitInfo.point.y + player.transform.position.y, hitInfo.point.z);
+            mousePlayerVec = v - player.transform.position;
+            transform.LookAt(v);
             rb.velocity = mousePlayerVec.normalized * projectileSpeed; //Lav vektor regning mellem player og mus :)
         }  
     }
