@@ -20,9 +20,15 @@ public class QProperties : MonoBehaviour
     public float magDmg;
 
     public GameObject hitParticles;
+    public GameObject particles;
+    GameObject temp;
 
     void Start()
     {
+        temp = Instantiate(particles, transform.position, Quaternion.identity);
+        temp.transform.Rotate(new Vector3(-90, 0, 0));
+        temp.GetComponent<ParticlesFollowProjectile>().parent = gameObject;
+
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerMove>();

@@ -5,11 +5,11 @@ using UnityEngine.AI;
 
 public class PlayerAbilities : MonoBehaviour
 {
-    public GameObject qProjectile;
+    public GameObject qProjectile, wProjectile;
     PlayerMove playerScript;
 
     bool castReady, qReady, wReady;
-    public float qManaCost, wManaCost;
+    public float qManaCost, wManaCost, wCastRange;
 
     public LayerMask clickableThings;
     NavMeshAgent playerNav;
@@ -33,22 +33,35 @@ public class PlayerAbilities : MonoBehaviour
             {
                 if(qReady == true && (playerScript.currentMana >= qManaCost))
                 {
-                    CastCD();
+                    StartCoroutine(CastCD());
 
                     playerScript.currentMana -= qManaCost;
-                    StartCoroutine(PutOnCooldown(2));
-                    StartCoroutine(InterruptMovement());
-                    LookAtLocation();
+                    StartCoroutine(PutOnCooldown(2, 0));
+                    StopAndLook();
                     Instantiate(qProjectile, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                 }
             }
 
             //Cast W ability
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.W))
             {
                 if(wReady == true && (playerScript.currentMana >= wManaCost))
                 {
-                    CastCD();
+                    Ray pointRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hitInfo;
+
+                    if (Physics.Raycast(pointRay, out hitInfo, 100, clickableThings))
+                    {
+                        if(Vector3.Distance(transform.position, hitInfo.point) <= wCastRange)
+                        {
+                            StartCoroutine(CastCD());
+
+                            playerScript.currentMana -= wManaCost;
+                            StartCoroutine(PutOnCooldown(3, 1));
+                            StopAndLook();
+                            Instantiate(wProjectile, new Vector3(hitInfo.point.x, hitInfo.point.y + 7, hitInfo.point.z), Quaternion.identity);
+                        }
+                    }
                 }
             }
         }
@@ -64,12 +77,26 @@ public class PlayerAbilities : MonoBehaviour
             transform.LookAt(new Vector3(hitInfo.point.x, hitInfo.point.y + transform.position.y, hitInfo.point.z));
         }
     }
-
-    IEnumerator PutOnCooldown(int CD)
+    
+    void StopAndLook()
     {
-        qReady = false;
-        yield return new WaitForSeconds(CD);
-        qReady = true;
+        LookAtLocation();
+        StartCoroutine(InterruptMovement());
+    }
+
+    IEnumerator PutOnCooldown(int CD, int WhichAbility)
+    {
+        if(WhichAbility == 0)
+        {
+            qReady = false;
+            yield return new WaitForSeconds(CD);
+            qReady = true;
+        }else if(WhichAbility == 1)
+        {
+            wReady = false;
+            yield return new WaitForSeconds(CD);
+            wReady = true;
+        } 
     }
 
     IEnumerator CastCD()
