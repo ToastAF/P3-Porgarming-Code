@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1277224233394837561}
   m_Layer: 0
   m_Name: WBall
-  m_TagString: Untagged
+  m_TagString: WHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,3 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   downWardForce: 15
   particles: {fileID: 1611922893552598214, guid: 7298296c76e0fe149bf29c51832941a6, type: 3}
+  groundSlam: {fileID: 3465396201860954750, guid: cac4aee2b8dd765409323d51af961951, type: 3}
+  slamParticles: {fileID: 5359076105687700458, guid: 942f10db78b36cd4b8387283112c3687, type: 3}
+  physDmg: 0
+  magDmg: 0

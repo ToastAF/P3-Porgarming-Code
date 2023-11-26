@@ -67,6 +67,19 @@ public class TurretScript : EnemyScript
                 Instantiate(hitParticles, new Vector3(transform.position.x, transform.position.y+2, transform.position.z), Quaternion.identity);
             }
         }
+
+        if (other.gameObject.CompareTag("WHitbox"))
+        {
+            WStatsCarryOver tempScr = other.gameObject.GetComponent<WStatsCarryOver>();
+            currentHealth -= calculateDamage(tempScr.physDmg, tempScr.magDmg);
+
+            print("DAMAGE! Current health: " + currentHealth);
+
+            if (currentHealth > 0)
+            {
+                Instantiate(hitParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
+            }
+        }
     }
 
     IEnumerator AttackCD(float number)

@@ -16,8 +16,7 @@ public class QProperties : MonoBehaviour
     float tempRange;
     public float setRange;
 
-    public float physDmg;
-    public float magDmg;
+    public float physDmg, magDmg;
 
     public GameObject hitParticles;
     public GameObject particles;
@@ -36,8 +35,9 @@ public class QProperties : MonoBehaviour
         playerStartPos = player.transform.position;
         //StartCoroutine(DestroySelf());
 
-        physDmg = playerScript.attackDamage * 0.5f;
-        magDmg = playerScript.abilityPower * 1.5f;
+        //Scaling on this ability dependant on the players stats
+        physDmg = playerScript.attackDamage * 1f;
+        magDmg = playerScript.abilityPower * 0.1f;
         
         Ray pointRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;

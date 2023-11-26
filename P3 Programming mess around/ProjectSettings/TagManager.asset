@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Minion Projectile
   - Ground
+  - WHitbox
   layers:
   - Default
   - TransparentFX

@@ -9,7 +9,7 @@ public class EnemyScript : MonoBehaviour
     public double currentHealth, armor, magicResist;
     public float range;
 
-    public GameObject hitParticles, deathParticles;
+    public GameObject hitParticles, hitParticlesW, deathParticles;
     public GameObject player;
 
     //Health bar
@@ -51,6 +51,20 @@ public class EnemyScript : MonoBehaviour
             if(currentHealth > 0)
             {
                 Instantiate(hitParticles, transform.position, Quaternion.identity);
+            }
+        }
+
+        if (other.gameObject.CompareTag("WHitbox"))
+        {
+            WStatsCarryOver tempScr = other.gameObject.GetComponent<WStatsCarryOver>();
+            currentHealth -= calculateDamage(tempScr.physDmg, tempScr.magDmg);
+
+            print("DAMAGE! Current health: " + currentHealth);
+
+            if (currentHealth > 0)
+            {
+                Instantiate(hitParticles, transform.position, Quaternion.identity);
+                Instantiate(hitParticlesW, transform.position, Quaternion.identity);
             }
         }
     }

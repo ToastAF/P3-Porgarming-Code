@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 3825607094887844825}
   - component: {fileID: 3318615566424141535}
   - component: {fileID: 5879977341585421844}
+  - component: {fileID: 6211324349108808550}
   - component: {fileID: 4783358147443311713}
   - component: {fileID: 8457954807106319213}
   m_Layer: 0
@@ -313,6 +314,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &6211324349108808550
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6567946245568251920}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!136 &4783358147443311713
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -328,7 +356,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -349,8 +377,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 0
+  currentHealth: 0
+  armor: 0
+  magicResist: 0
+  range: 0
   hitParticles: {fileID: 6784171575501145830, guid: eb8a086679f2a8448bbea6e848c1c3f2, type: 3}
+  hitParticlesW: {fileID: 6585287356825007837, guid: 952de4a9861a1434390aa0bf4170533d, type: 3}
   deathParticles: {fileID: 6690215772789864059, guid: 8bc7b7fe877427449a76c9ef3b2be924, type: 3}
+  player: {fileID: 0}
   hBar: {fileID: 5654370892582515036}
 --- !u!1 &7189330955830296124
 GameObject:
