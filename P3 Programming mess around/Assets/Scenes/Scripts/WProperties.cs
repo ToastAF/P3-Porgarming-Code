@@ -12,7 +12,7 @@ public class WProperties : MonoBehaviour
     {
         temp = Instantiate(particles, transform.position, Quaternion.identity);
         temp.transform.Rotate(new Vector3(-90, 0, 0));
-        temp.GetComponent<ParticlesFollowProjectile>().parent = gameObject;
+        temp.GetComponent<ParticlesWFollowProjectile>().parent = gameObject;
     }
 
     void Update()

@@ -25,9 +25,10 @@ public class QProperties : MonoBehaviour
 
     void Start()
     {
+        //Spawn the particles that will follow the projectile
         temp = Instantiate(particles, transform.position, Quaternion.identity);
-        temp.transform.Rotate(new Vector3(-90, 0, 0));
-        temp.GetComponent<ParticlesFollowProjectile>().parent = gameObject;
+        temp.transform.Rotate(new Vector3(0, 180, 0));
+        temp.GetComponent<ParticlesQFollowProjectile>().parent = gameObject;
 
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player");
@@ -71,10 +72,8 @@ public class QProperties : MonoBehaviour
 
     IEnumerator DestroySelf()
     {
-        //print("I'm alive!");
         yield return new WaitForSeconds(2);
 
-        //print("I'm gone!");
         Destroy(gameObject);
     }
 }

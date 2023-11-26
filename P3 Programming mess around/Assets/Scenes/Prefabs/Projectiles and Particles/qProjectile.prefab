@@ -154,3 +154,4 @@ MonoBehaviour:
   physDmg: 10
   magDmg: 0
   hitParticles: {fileID: 6585287356825007837, guid: 0cf2979e499bd5341b89f1c88be2def1, type: 3}
+  particles: {fileID: 5590833142975681280, guid: d470fa5db75953e47853116a23aefe9a, type: 3}
