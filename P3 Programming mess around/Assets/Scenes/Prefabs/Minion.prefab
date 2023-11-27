@@ -367,6 +367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5268531518587548185}
+  - component: {fileID: 8705628399855967516}
   - component: {fileID: 7774423243408578181}
   - component: {fileID: 7685989315444182243}
   - component: {fileID: 4472092566140312868}
@@ -396,6 +397,33 @@ Transform:
   - {fileID: 4164036007982864620}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &8705628399855967516
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4495431614460873031}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!135 &7774423243408578181
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -435,7 +463,9 @@ MonoBehaviour:
   magicResist: 0
   range: 5
   hitParticles: {fileID: 6784171575501145830, guid: eb8a086679f2a8448bbea6e848c1c3f2, type: 3}
+  hitParticlesW: {fileID: 0}
   deathParticles: {fileID: 6690215772789864059, guid: 8bc7b7fe877427449a76c9ef3b2be924, type: 3}
+  player: {fileID: 0}
   hBar: {fileID: 8166113042759905300}
   rangeCircle: {fileID: 6385968442553146613}
   projectile: {fileID: 3480469576529606801, guid: 3c52f0441ee5ad743acdb728e3ddd52f, type: 3}

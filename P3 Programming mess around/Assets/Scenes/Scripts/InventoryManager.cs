@@ -5,24 +5,22 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
+    //An array of gameobjects to hold the information of the items bought in the shop
     public GameObject[] items = new GameObject[6];
     public int countedItems = 0;
 
-    void Start()
+    //AddItem is called in ShopScript.cs. It adds items to the 'items' array full of gameobjects. Technically it only changes the sprite on the 6 inventory slots ingame :)
+    public void AddItem(int itemType)
     {
-        
-    }
-
-    void Update()
-    {
-        if(countedItems < 6)
-        {
-            if (Input.GetKeyDown(KeyCode.A))
+            if(itemType == 0) //Add the sword to inventory
             {
-                items[0].GetComponent<Image>().sprite = Resources.Load<Sprite>("EmptyItem");
-                countedItems++;
-                print("Did it, boss! Item count: " + countedItems);
+                items[countedItems].GetComponent<Image>().sprite = Resources.Load<Sprite>("Sword");
             }
-        }
+            if (itemType == 1) //Add the book to inventory
+            {
+                items[countedItems].GetComponent<Image>().sprite = Resources.Load<Sprite>("Book");
+            }
+            //Add a count to countedItems to keep track of which sprite to change
+            countedItems++;
     }
 }

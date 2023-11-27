@@ -8,12 +8,11 @@ public class SpriteBillboarding : MonoBehaviour
 
     void Start()
     {
-        cam = Camera.main;
+        cam = Camera.main; //Find the main camera
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.rotation = cam.transform.rotation;
+        transform.rotation = cam.transform.rotation; //Rotate the 2D sprite so it faces the same direction as the camera, as to appear flat
     }
 }

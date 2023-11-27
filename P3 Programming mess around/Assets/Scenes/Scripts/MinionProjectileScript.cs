@@ -8,22 +8,21 @@ public class MinionProjectileScript : MonoBehaviour
 {
     GameObject player;
     public GameObject hitPlayerParticle;
-    NavMeshAgent agent;
     public float physDmg, magDmg, projectileSpeed, hitRadius;
 
     void Start()
     {
+        //Find the Player in the scene by the tag "Player"
         player = GameObject.FindGameObjectWithTag("Player");
-        agent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
     {
-        //agent.SetDestination(player.transform.position);
-
+        //Move towards the player at a set speed
         float temp = projectileSpeed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, temp);
 
+        //When the projectile gets close to the player, the TakeDamage method is called on the player, particles are spawned and the projectile is destroyed, thus having ended its purpose
         if(Vector3.Distance(transform.position, player.transform.position) < hitRadius)
         {
             player.GetComponent<PlayerMove>().TakeDamage(physDmg, magDmg);

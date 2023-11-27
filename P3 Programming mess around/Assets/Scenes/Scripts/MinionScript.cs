@@ -16,16 +16,17 @@ public class MinionScript : EnemyScript
     public float attackSpeedDelay;
 
     Animator anim;
-    //GameObject player;
 
     void Start()
     {
+        //The starts for the minion is set here
         maxHealth = 10;
         currentHealth = maxHealth;
         armor = 20;
         magicResist = 0;
 
         player = GameObject.FindGameObjectWithTag("Player");
+        //Finding the animator component
         anim = GetComponent<Animator>();
     }
 
@@ -41,7 +42,7 @@ public class MinionScript : EnemyScript
         if(Vector3.Distance(transform.position, player.transform.position) < range)
         {
             rangeCircle.GetComponent<SpriteRenderer>().color = inRange;
-            if (attackCD == false)
+            if (attackCD == false) //Doesn't attack if it is on cooldown
             {
                 StartCoroutine(AttackCD(attackSpeedDelay)); 
             }
@@ -51,6 +52,7 @@ public class MinionScript : EnemyScript
             rangeCircle.GetComponent<SpriteRenderer>().color = normal;
         }
 
+        //If the minions health is reduced to 0, it is destroyed, spawning particles and giving the player gold
         if (currentHealth <= 0)
         {
             player.GetComponent<PlayerMove>().gold += 50;
@@ -59,6 +61,7 @@ public class MinionScript : EnemyScript
         }
     }
 
+    //Used in a coroutine to attack the player by spawning a minionProjectile, put the attack on cooldown, and play animation
     IEnumerator AttackCD(float number)
     {
         attackCD = true;
@@ -71,6 +74,7 @@ public class MinionScript : EnemyScript
         attackCD = false;
     }
 
+    //Method that makes the minion look at the player
     void LookAtPlayer()
     {
         Vector3 temp = player.transform.position;

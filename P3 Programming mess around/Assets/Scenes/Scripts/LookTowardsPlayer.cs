@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LookTowardsPlayer : MonoBehaviour
 {
+    //This scripts rotates the gameobject it is on and points it toward the player. It also rotates a changeable amount, which can be adjusted in the inspector
     GameObject player;
     public float rotateExtraAmountX, rotateExtraAmountY, rotateExtraAmountZ;
     void Start()
@@ -11,11 +12,5 @@ public class LookTowardsPlayer : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         transform.LookAt(player.transform.position);
         transform.Rotate(rotateExtraAmountX, rotateExtraAmountY, rotateExtraAmountZ);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -5,9 +5,11 @@ using UnityEngine;
 public class ShopScript : MonoBehaviour
 {
     PlayerMove playerScr;
+    InventoryManager inventory;
     public GameObject shop;
     bool shopClosed;
-
+    
+    //The class 'Item' is used to easily create new items for the player to buy. These items have stats and a price
     class Item
     {
         public float atkDmg, magDmg;
@@ -20,19 +22,23 @@ public class ShopScript : MonoBehaviour
             buyPrice = price;
         }
     }
+    //Two items are instantiated
     Item sword = new Item(10, 0, 300);
     Item magicBook = new Item(0, 10, 300);
     
 
     void Start()
     {
-        playerScr = gameObject.GetComponent<PlayerMove>();
-        shop.SetActive(false);
+        //Yoink the other scripts which are also on the player
+        playerScr = GetComponent<PlayerMove>();
+        inventory = GetComponent<InventoryManager>();
+        shop.SetActive(false); //Close shop on start
         shopClosed = true;
     }
 
     void Update()
     {
+        //Clicking P opens or closes the shop menu
         if (Input.GetKeyDown(KeyCode.P))
         {
             if (shopClosed == true)
@@ -50,27 +56,45 @@ public class ShopScript : MonoBehaviour
 
     public void BuySword()
     {
-        if(playerScr.gold >= sword.buyPrice)
+        //If there is less than 6 items in the inventory and the player has enough gold, an item is added to the inventory and gold is taken for the purchase.
+        if(inventory.countedItems < 6)
         {
-            playerScr.attackDamage += sword.atkDmg;
-            playerScr.gold -= sword.buyPrice;
+            if(playerScr.gold >= sword.buyPrice)
+            {
+                playerScr.attackDamage += sword.atkDmg; //Also the items stats are transfered to the player
+                playerScr.gold -= sword.buyPrice;
+                inventory.AddItem(0);
+            }
+            else
+            {
+                print("Not enough gold!");
+            }
         }
         else
         {
-            print("Not enough gold!");
+            print("Not enough space!");
         }
     }
 
+    //This does the same as the method above. Both are being called from UI buttons in the canvas while playing the game, hence the public prefix
     public void BuyMagicBook()
     {
-        if (playerScr.gold >= magicBook.buyPrice)
+        if(inventory.countedItems < 6)
         {
-            playerScr.abilityPower += magicBook.magDmg;
-            playerScr.gold -= magicBook.buyPrice;
+            if (playerScr.gold >= magicBook.buyPrice)
+            {
+                playerScr.abilityPower += magicBook.magDmg;
+                playerScr.gold -= magicBook.buyPrice;
+                inventory.AddItem(1);
+            }
+            else
+            {
+                print("Not enough gold!");
+            }
         }
         else
         {
-            print("Not enough gold!");
+            print("Not enough space!");
         }
     }
 }
