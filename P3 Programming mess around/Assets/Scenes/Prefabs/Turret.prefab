@@ -1163,7 +1163,7 @@ MonoBehaviour:
   magicResist: 20
   range: 10
   hitParticles: {fileID: 5109446828848855975, guid: ca78582487da07e4fa2d5c61a9d29706, type: 3}
-  hitParticlesW: {fileID: 0}
+  hitParticlesW: {fileID: 6585287356825007837, guid: 952de4a9861a1434390aa0bf4170533d, type: 3}
   deathParticles: {fileID: 5109446828848855975, guid: 55d4a684fe79c4047b40523f6f02bc8d, type: 3}
   player: {fileID: 0}
   hBar: {fileID: 3571946375083357231}
